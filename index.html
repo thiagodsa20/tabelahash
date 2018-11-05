@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Alunos</title>
+    <style>
+        .separado {
+            border-left: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="tarefasApp">
+        <h2>Controle de Alunos</h2>
+        <div>
+            <form v-on:submit="addTarefa">
+                <input type="text" v-model="novaTarefa.titulo" placeholder = "Digite a Matrícula">
+                <input type="submit" value = "Pronto">
+            </form>
+            <div class = "separado">
+                <form v-on:submit="addTarefa">
+                    <input type="text" v-model="novaTarefa.titulo" placeholder = "Digite o nome do aluno">
+                    <input type="submit" value = "Pronto">
+                </form>
+            </div>
+        </div>
+        <hr>
+        <h2>Lista de Alunos</h2> 
+        <table>
+            <thead>
+                <th>Matrícula</th>
+                <th>Aluno</th>
+                <th>Remover</th>
+            </thead>    
+            <tbody>
+                <tr v-for="tarefa in tarefas">
+                    <td></td>
+                    <td><span v-bind:class="{ tarefaPronta: tarefa.pronta }">{{tarefa.titulo}}</span></td>
+                    <td><button v-on:click="removerTarefa(tarefa)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src = "https://unpkg.com/vue/dist/vue.js"></script>
+    <script> 
+        var tarefasApp = new Vue({
+            el: "#tarefasApp",
+            data: {
+                tarefas:[
+                    { titulo: "Adicione um nome de aluno", pronta: false}
+                ],
+                matricula:[
+                    {titulo: "Adicione uma matrícula", pronta:false}
+                ],
+                novaTarefa: {
+                    titulo: '',
+                    pronta: false,
+                }
+            },
+
+            methods: {
+                addTarefa: function(e) {
+                    e.preventDefault();
+                    this.tarefas.push(this.novaTarefa);
+                },
+                removerTarefa: function(tarefa){
+                    this.tarefas.splice(this.tarefas.indexOf(tarefa), 1);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
