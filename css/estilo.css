@@ -1,0 +1,12 @@
+.separado {
+    text-align:center;
+}
+
+.fundo {
+    background: url(background.jpg);
+}
+
+.fundo-navbar {
+    background-color: gray;
+}
+
